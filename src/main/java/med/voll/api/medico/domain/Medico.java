@@ -57,11 +57,9 @@ public class Medico {
             this.nome = update.nome();
         }
 
-
         if (update.endereco() != null) {
             this.endereco.atualizarInformacoes(update.endereco());
         }
-
 
         if (update.telefone() != null) {
             this.telefone = update.telefone();
