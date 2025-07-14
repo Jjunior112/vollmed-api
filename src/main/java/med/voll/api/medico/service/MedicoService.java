@@ -1,6 +1,7 @@
 package med.voll.api.medico.service;
 
 
+import jakarta.persistence.EntityNotFoundException;
 import med.voll.api.medico.domain.Medico;
 import med.voll.api.medico.dto.DadosCadastroMedico;
 import med.voll.api.medico.dto.DadosListagemMedico;
@@ -43,30 +44,26 @@ public class MedicoService {
     }
 
     public DadosListagemMedico updateMedico(long id, UpdateMedico update) {
-        Medico medico = repository.getReferenceById(id);
 
-        if(medico==null)
-        {
-            return null;
+        try {
+            Medico medico = repository.getReferenceById(id);
+            medico.atualizarInformacoes(update);
+            return new DadosListagemMedico(medico);
+        } catch (EntityNotFoundException ex) {
+
+            throw new NullPointerException( "Médico não encontrado!");
         }
-
-        medico.atualizarInformacoes(update);
-
-        return new DadosListagemMedico(medico);
 
     }
 
     public DeleteMedico deleteMedico(long id) {
-        Medico medico = repository.getReferenceById(id);
-
-        if (medico == null) {
-            return new DeleteMedico(false, "Medico não encontrado!");
+        try {
+            Medico medico = repository.getReferenceById(id);
+            medico.deleteMedico();
+            return new DeleteMedico(true, "Médico inativado!");
+        } catch (EntityNotFoundException ex) {
+            return new DeleteMedico(false, "Médico não encontrado!");
         }
-
-        medico.deleteMedico();
-
-
-        return new DeleteMedico(true, "Medico inativo!");
 
     }
 
