@@ -1,19 +1,17 @@
-package med.voll.api.medico.service;
+package med.voll.api.services;
 
 
 import jakarta.persistence.EntityNotFoundException;
-import med.voll.api.medico.domain.Medico;
-import med.voll.api.medico.dto.DadosCadastroMedico;
-import med.voll.api.medico.dto.DadosListagemMedico;
-import med.voll.api.medico.dto.DeleteMedico;
-import med.voll.api.medico.dto.UpdateMedico;
-import med.voll.api.medico.repository.MedicoRepository;
+import med.voll.api.domain.Medico;
+import med.voll.api.dtos.DadosCadastroMedico;
+import med.voll.api.dtos.DadosListagemMedico;
+import med.voll.api.dtos.UpdateMedico;
+import med.voll.api.repositories.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -51,19 +49,16 @@ public class MedicoService {
             return new DadosListagemMedico(medico);
         } catch (EntityNotFoundException ex) {
 
-            throw new NullPointerException( "Médico não encontrado!");
+            throw new NullPointerException("Médico não encontrado!");
         }
 
     }
 
-    public DeleteMedico deleteMedico(long id) {
-        try {
-            Medico medico = repository.getReferenceById(id);
-            medico.deleteMedico();
-            return new DeleteMedico(true, "Médico inativado!");
-        } catch (EntityNotFoundException ex) {
-            return new DeleteMedico(false, "Médico não encontrado!");
-        }
+    public void deleteMedico(long id) {
+
+        Medico medico = repository.getReferenceById(id);
+        medico.deleteMedico();
+
 
     }
 

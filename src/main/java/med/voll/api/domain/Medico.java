@@ -1,11 +1,11 @@
-package med.voll.api.medico.domain;
+package med.voll.api.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
 import med.voll.api.endereco.domain.Endereco;
-import med.voll.api.medico.dto.DadosCadastroMedico;
-import med.voll.api.medico.dto.UpdateMedico;
-import med.voll.api.medico.enums.Especialidade;
+import med.voll.api.dtos.DadosCadastroMedico;
+import med.voll.api.dtos.UpdateMedico;
+import med.voll.api.enums.Especialidade;
 
 
 @Entity

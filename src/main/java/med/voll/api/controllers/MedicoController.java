@@ -1,13 +1,12 @@
-package med.voll.api.medico.controller;
+package med.voll.api.controllers;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import med.voll.api.medico.domain.Medico;
-import med.voll.api.medico.dto.DadosCadastroMedico;
-import med.voll.api.medico.dto.DadosListagemMedico;
-import med.voll.api.medico.dto.DeleteMedico;
-import med.voll.api.medico.dto.UpdateMedico;
-import med.voll.api.medico.service.MedicoService;
+import med.voll.api.domain.Medico;
+import med.voll.api.dtos.DadosCadastroMedico;
+import med.voll.api.dtos.DadosListagemMedico;
+import med.voll.api.dtos.UpdateMedico;
+import med.voll.api.services.MedicoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -64,16 +63,12 @@ public class MedicoController {
         return new ResponseEntity<>(updatedMedico, HttpStatus.OK);
 
     }
-
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity<String> deleteMedico(@PathVariable long id) {
-        DeleteMedico response = this.medicoService.deleteMedico(id);
+    public ResponseEntity deleteMedico(@PathVariable long id) {
 
-        if (response.success()) {
-            return new ResponseEntity<>(response.message(), HttpStatus.OK);
-        }
+        this.medicoService.deleteMedico(id);
 
-        return new ResponseEntity<>(response.message(), HttpStatus.NOT_FOUND);
+        return ResponseEntity.noContent().build();
     }
 }

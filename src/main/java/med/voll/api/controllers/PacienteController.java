@@ -1,13 +1,11 @@
-package med.voll.api.Paciente.controller;
+package med.voll.api.controllers;
 
 import jakarta.transaction.Transactional;
-import med.voll.api.Paciente.domain.Paciente;
-import med.voll.api.Paciente.dto.DadosCadastroPaciente;
-import med.voll.api.Paciente.dto.DadosListagemPaciente;
-import med.voll.api.Paciente.dto.DeletePaciente;
-import med.voll.api.Paciente.dto.UpdatePaciente;
-import med.voll.api.Paciente.service.PacienteService;
-import med.voll.api.medico.dto.DadosListagemMedico;
+import med.voll.api.domain.Paciente;
+import med.voll.api.dtos.DadosCadastroPaciente;
+import med.voll.api.dtos.DadosListagemPaciente;
+import med.voll.api.dtos.UpdatePaciente;
+import med.voll.api.services.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +13,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
@@ -68,13 +65,10 @@ public class PacienteController {
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<String> deletePaciente(@PathVariable long id) {
-        DeletePaciente response = service.deletePaciente(id);
 
-        if (response.success()) {
-            return new ResponseEntity<>(response.message(), HttpStatus.OK);
-        }
+        service.deletePaciente(id);
 
-        return new ResponseEntity<>(response.message(), HttpStatus.NOT_FOUND);
+        return ResponseEntity.noContent().build();
     }
 
 

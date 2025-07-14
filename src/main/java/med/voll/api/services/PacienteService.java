@@ -1,11 +1,10 @@
-package med.voll.api.Paciente.service;
+package med.voll.api.services;
 
-import med.voll.api.Paciente.domain.Paciente;
-import med.voll.api.Paciente.dto.DadosCadastroPaciente;
-import med.voll.api.Paciente.dto.DadosListagemPaciente;
-import med.voll.api.Paciente.dto.DeletePaciente;
-import med.voll.api.Paciente.dto.UpdatePaciente;
-import med.voll.api.Paciente.repository.PacienteRepository;
+import med.voll.api.domain.Paciente;
+import med.voll.api.dtos.DadosCadastroPaciente;
+import med.voll.api.dtos.DadosListagemPaciente;
+import med.voll.api.dtos.UpdatePaciente;
+import med.voll.api.repositories.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -58,16 +57,11 @@ public class PacienteService {
 
     }
 
-    public DeletePaciente deletePaciente(long id) {
-        try {
+    public void deletePaciente(long id) {
+
             Paciente paciente = repository.getReferenceById(id);
 
             paciente.deletePaciente();
 
-            return new DeletePaciente(true, "Pacienten inativo!");
-
-        } catch (Exception ex) {
-            return new DeletePaciente(false, "Pacienten não encontrado!");
-        }
     }
 }
