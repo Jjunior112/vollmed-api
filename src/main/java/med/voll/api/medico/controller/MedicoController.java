@@ -15,6 +15,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Optional;
 
@@ -27,10 +28,12 @@ public class MedicoController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<DadosListagemMedico> cadastrar(@RequestBody @Valid DadosCadastroMedico dados) {
+    public ResponseEntity<DadosListagemMedico> cadastrar(@RequestBody @Valid DadosCadastroMedico dados, UriComponentsBuilder uriBuilder) {
         Medico response = this.medicoService.createMedico(dados);
 
-        return new ResponseEntity<>(new DadosListagemMedico(response), HttpStatus.CREATED);
+        var uri = uriBuilder.path("/medicos/{id}").buildAndExpand(response.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(new DadosListagemMedico(response));
 
     }
 
@@ -59,7 +62,6 @@ public class MedicoController {
         }
 
         return new ResponseEntity<>(updatedMedico, HttpStatus.OK);
-
 
     }
 
