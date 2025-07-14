@@ -4,11 +4,12 @@ import jakarta.persistence.*;
 import lombok.*;
 import med.voll.api.endereco.domain.Endereco;
 import med.voll.api.medico.dto.DadosCadastroMedico;
+import med.voll.api.medico.dto.UpdateMedico;
 import med.voll.api.medico.enums.Especialidade;
 
 
 @Entity
-@Table(name="medico")
+@Table(name = "medico")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -38,13 +39,39 @@ public class Medico {
     @Embedded
     private Endereco endereco;
 
-    public Medico(DadosCadastroMedico data)
-    {
+    private boolean isActive;
+
+    public Medico(DadosCadastroMedico data) {
         this.nome = data.nome();
         this.email = data.email();
         this.telefone = data.telefone();
         this.crm = data.crm();
+        this.isActive = true;
         this.especialidade = data.especialidade();
         this.endereco = new Endereco(data.endereco());
+
+    }
+
+    public void atualizarInformacoes(UpdateMedico update) {
+        if (update.nome() != null) {
+            this.nome = update.nome();
+        }
+
+
+        if (update.endereco() != null) {
+            this.endereco.atualizarInformacoes(update.endereco());
+        }
+
+
+        if (update.telefone() != null) {
+            this.telefone = update.telefone();
+        }
+        if (update.isActive()) {
+            this.isActive = update.isActive();
+        }
+    }
+
+    public void deleteMedico() {
+        this.isActive = false;
     }
 }
