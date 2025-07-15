@@ -32,28 +32,20 @@ public class PacienteService {
     }
 
     public DadosListagemPaciente findById(long id) {
-        try {
+
             Paciente paciente = repository.getReferenceById(id);
 
             return new DadosListagemPaciente(paciente);
 
-        } catch (Exception ex) {
-            throw new NullPointerException("Paciente não encontrado!");
-        }
     }
 
     public DadosListagemPaciente updatePaciente(long id, UpdatePaciente update) {
-        try {
+
             Paciente paciente = repository.getReferenceById(id);
 
             paciente.atualizarInformacoes(update);
 
             return new DadosListagemPaciente(paciente);
-
-
-        } catch (Exception ex) {
-            throw new NullPointerException("Paciente não encontrado!");
-        }
 
     }
 
