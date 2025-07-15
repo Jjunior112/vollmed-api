@@ -33,24 +33,20 @@ public class MedicoService {
         return repository.findAllByIsActiveTrue(paginacao).map(DadosListagemMedico::new);
     }
 
-    public Optional<DadosListagemMedico> findMedicoById(long id) {
+    public Medico findMedicoById(long id) {
 
-        Optional<Medico> optionalMedico = repository.findById(id);
+        Medico medico = repository.getReferenceById(id);
 
-        return optionalMedico.map(DadosListagemMedico::new);
+        return medico;
 
     }
 
     public DadosListagemMedico updateMedico(long id, UpdateMedico update) {
 
-        try {
-            Medico medico = repository.getReferenceById(id);
-            medico.atualizarInformacoes(update);
-            return new DadosListagemMedico(medico);
-        } catch (EntityNotFoundException ex) {
+        Medico medico = repository.getReferenceById(id);
+        medico.atualizarInformacoes(update);
+        return new DadosListagemMedico(medico);
 
-            throw new NullPointerException("Médico não encontrado!");
-        }
 
     }
 
