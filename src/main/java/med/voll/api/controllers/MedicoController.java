@@ -45,20 +45,16 @@ public class MedicoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<DadosListagemMedico>> getById(@PathVariable long id) {
-        Optional<DadosListagemMedico> medico = this.medicoService.findMedicoById(id);
+    public ResponseEntity<DadosListagemMedico> getById(@PathVariable long id) {
+        Medico medico = this.medicoService.findMedicoById(id);
 
-        return new ResponseEntity<>(medico, HttpStatus.OK);
+        return new ResponseEntity<>(new DadosListagemMedico(medico), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity<DadosListagemMedico> updateMedico(@PathVariable long id, @RequestBody UpdateMedico update) {
         DadosListagemMedico updatedMedico = this.medicoService.updateMedico(id, update);
-
-        if (updatedMedico == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
 
         return new ResponseEntity<>(updatedMedico, HttpStatus.OK);
 
