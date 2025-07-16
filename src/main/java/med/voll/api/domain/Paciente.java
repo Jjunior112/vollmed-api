@@ -3,8 +3,8 @@ package med.voll.api.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import med.voll.api.dtos.DadosCadastroPaciente;
-import med.voll.api.dtos.UpdatePaciente;
+import med.voll.api.dtos.paciente.DadosCadastroPaciente;
+import med.voll.api.dtos.paciente.UpdatePaciente;
 import med.voll.api.endereco.domain.Endereco;
 
 @Entity

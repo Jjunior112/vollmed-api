@@ -2,9 +2,9 @@ package med.voll.api.controllers;
 
 import jakarta.transaction.Transactional;
 import med.voll.api.domain.Paciente;
-import med.voll.api.dtos.DadosCadastroPaciente;
-import med.voll.api.dtos.DadosListagemPaciente;
-import med.voll.api.dtos.UpdatePaciente;
+import med.voll.api.dtos.paciente.DadosCadastroPaciente;
+import med.voll.api.dtos.paciente.DadosListagemPaciente;
+import med.voll.api.dtos.paciente.UpdatePaciente;
 import med.voll.api.services.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
