@@ -3,9 +3,9 @@ package med.voll.api.controllers;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import med.voll.api.domain.Medico;
-import med.voll.api.dtos.DadosCadastroMedico;
-import med.voll.api.dtos.DadosListagemMedico;
-import med.voll.api.dtos.UpdateMedico;
+import med.voll.api.dtos.medico.DadosCadastroMedico;
+import med.voll.api.dtos.medico.DadosListagemMedico;
+import med.voll.api.dtos.medico.UpdateMedico;
 import med.voll.api.services.MedicoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,8 +15,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/medicos")

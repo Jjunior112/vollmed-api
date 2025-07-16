@@ -3,8 +3,8 @@ package med.voll.api.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import med.voll.api.endereco.domain.Endereco;
-import med.voll.api.dtos.DadosCadastroMedico;
-import med.voll.api.dtos.UpdateMedico;
+import med.voll.api.dtos.medico.DadosCadastroMedico;
+import med.voll.api.dtos.medico.UpdateMedico;
 import med.voll.api.enums.Especialidade;
 
 

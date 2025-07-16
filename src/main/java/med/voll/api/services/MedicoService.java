@@ -1,18 +1,15 @@
 package med.voll.api.services;
 
 
-import jakarta.persistence.EntityNotFoundException;
 import med.voll.api.domain.Medico;
-import med.voll.api.dtos.DadosCadastroMedico;
-import med.voll.api.dtos.DadosListagemMedico;
-import med.voll.api.dtos.UpdateMedico;
+import med.voll.api.dtos.medico.DadosCadastroMedico;
+import med.voll.api.dtos.medico.DadosListagemMedico;
+import med.voll.api.dtos.medico.UpdateMedico;
 import med.voll.api.repositories.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class MedicoService {
