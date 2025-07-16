@@ -1,4 +1,4 @@
-package med.voll.api.dtos;
+package med.voll.api.dtos.paciente;
 
 import med.voll.api.endereco.dto.DadosEndereco;
 

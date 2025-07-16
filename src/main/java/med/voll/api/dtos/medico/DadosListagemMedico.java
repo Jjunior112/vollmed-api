@@ -1,4 +1,4 @@
-package med.voll.api.dtos;
+package med.voll.api.dtos.medico;
 
 import med.voll.api.domain.Medico;
 import med.voll.api.enums.Especialidade;
