@@ -1,10 +1,10 @@
-package med.voll.api.services;
+package med.voll.api.application.services;
 
-import med.voll.api.domain.Paciente;
-import med.voll.api.dtos.paciente.DadosCadastroPaciente;
-import med.voll.api.dtos.paciente.DadosListagemPaciente;
-import med.voll.api.dtos.paciente.UpdatePaciente;
-import med.voll.api.repositories.PacienteRepository;
+import med.voll.api.domain.models.Paciente;
+import med.voll.api.domain.dtos.paciente.DadosCadastroPaciente;
+import med.voll.api.domain.dtos.paciente.DadosListagemPaciente;
+import med.voll.api.domain.dtos.paciente.UpdatePaciente;
+import med.voll.api.infra.repositories.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,11 +31,11 @@ public class PacienteService {
         return repository.findAllByIsActiveTrue(paginacao).map(DadosListagemPaciente::new);
     }
 
-    public DadosListagemPaciente findById(long id) {
+    public Paciente findById(long id) {
 
             Paciente paciente = repository.getReferenceById(id);
 
-            return new DadosListagemPaciente(paciente);
+            return paciente;
 
     }
 

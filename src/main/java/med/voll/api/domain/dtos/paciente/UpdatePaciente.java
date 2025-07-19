@@ -1,6 +1,6 @@
-package med.voll.api.dtos.paciente;
+package med.voll.api.domain.dtos.paciente;
 
-import med.voll.api.endereco.dto.DadosEndereco;
+import med.voll.api.domain.dtos.endereco.DadosEndereco;
 
 public record UpdatePaciente(String nome, String telefone, DadosEndereco endereco, boolean isActive) {
 }

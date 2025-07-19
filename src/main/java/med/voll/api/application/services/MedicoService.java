@@ -1,11 +1,11 @@
-package med.voll.api.services;
+package med.voll.api.application.services;
 
 
-import med.voll.api.domain.Medico;
-import med.voll.api.dtos.medico.DadosCadastroMedico;
-import med.voll.api.dtos.medico.DadosListagemMedico;
-import med.voll.api.dtos.medico.UpdateMedico;
-import med.voll.api.repositories.MedicoRepository;
+import med.voll.api.domain.models.Medico;
+import med.voll.api.domain.dtos.medico.DadosCadastroMedico;
+import med.voll.api.domain.dtos.medico.DadosListagemMedico;
+import med.voll.api.domain.dtos.medico.UpdateMedico;
+import med.voll.api.infra.repositories.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -1,6 +1,6 @@
-package med.voll.api.repositories;
+package med.voll.api.infra.repositories;
 
-import med.voll.api.domain.User;
+import med.voll.api.domain.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 
