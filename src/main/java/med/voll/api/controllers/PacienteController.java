@@ -1,11 +1,11 @@
 package med.voll.api.controllers;
 
 import jakarta.transaction.Transactional;
-import med.voll.api.domain.Paciente;
-import med.voll.api.dtos.paciente.DadosCadastroPaciente;
-import med.voll.api.dtos.paciente.DadosListagemPaciente;
-import med.voll.api.dtos.paciente.UpdatePaciente;
-import med.voll.api.services.PacienteService;
+import med.voll.api.domain.models.Paciente;
+import med.voll.api.domain.dtos.paciente.DadosCadastroPaciente;
+import med.voll.api.domain.dtos.paciente.DadosListagemPaciente;
+import med.voll.api.domain.dtos.paciente.UpdatePaciente;
+import med.voll.api.application.services.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -46,9 +46,11 @@ public class PacienteController {
     @GetMapping("/{id}")
     public ResponseEntity<DadosListagemPaciente> getById(@PathVariable long id) {
 
-        DadosListagemPaciente paciente = service.findById(id);
+        Paciente paciente = service.findById(id);
 
-        return new ResponseEntity<>(paciente, HttpStatus.OK);
+
+
+        return new ResponseEntity<>(new DadosListagemPaciente(paciente), HttpStatus.OK);
 
     }
 
