@@ -34,9 +34,9 @@ public class ConsultaController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<DadosDetalhamentoConsulta>> getAllConsultas(@PageableDefault(size = 10, sort = {"data"}) Pageable paginacao) {
+    public ResponseEntity<Page<DadosDetalhamentoConsulta>> getAllConsultas(@PageableDefault(size = 10, sort = {"data"}) Pageable paginacao, @RequestParam(name = "paciente", required = false) Long idPaciente) {
 
-        Page<DadosDetalhamentoConsulta> consultas = consultaService.findAll(paginacao);
+        Page<DadosDetalhamentoConsulta> consultas = consultaService.findAll(idPaciente, paginacao);
 
         return new ResponseEntity<>(consultas, HttpStatus.OK);
     }
@@ -48,6 +48,16 @@ public class ConsultaController {
         DadosDetalhamentoConsulta response = consultaService.findConsultaById(id);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+
+    @DeleteMapping("{id}")
+    @Transactional
+
+    public ResponseEntity deleteConsulta(@PathVariable Long id) {
+        consultaService.deleteConsulta(id);
+
+        return ResponseEntity.noContent().build();
     }
 
 }
