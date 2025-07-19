@@ -1,6 +1,8 @@
 package med.voll.api.infra.exceptions;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.ValidationException;
+import med.voll.api.infra.validations.Validation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -23,10 +25,15 @@ public class HandlerExceptions extends RuntimeException {
         return ResponseEntity.badRequest().body(errors.stream().map(FieldsErrors::new).toList());
     }
 
-    private record FieldsErrors(String field, String message){
-        public FieldsErrors(FieldError error)
-        {
-            this(error.getField(),error.getDefaultMessage());
+    private record FieldsErrors(String field, String message) {
+        public FieldsErrors(FieldError error) {
+            this(error.getField(), error.getDefaultMessage());
         }
+    }
+
+    @ExceptionHandler(ValidationException.class)
+
+    public ResponseEntity errorValidation(ValidationException ex) {
+        return ResponseEntity.badRequest().body(ex.getMessage());
     }
 }
