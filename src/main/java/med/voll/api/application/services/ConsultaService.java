@@ -51,7 +51,11 @@ public class ConsultaService {
 
     }
 
-    public Page<DadosDetalhamentoConsulta> findAll(Pageable paginacao) {
+    public Page<DadosDetalhamentoConsulta> findAll(Long idPaciente,Pageable paginacao ) {
+
+        if (idPaciente != null) {
+            return repository.findByPacienteId(idPaciente, paginacao).map(DadosDetalhamentoConsulta::new);
+        }
 
         return repository.findAll(paginacao).map(DadosDetalhamentoConsulta::new);
 
@@ -61,6 +65,14 @@ public class ConsultaService {
         Consulta consulta = repository.getReferenceById(id);
 
         return new DadosDetalhamentoConsulta(consulta);
+    }
+
+
+    public void deleteConsulta(Long id) {
+
+        Consulta consulta = repository.getReferenceById(id);
+
+        repository.delete(consulta);
     }
 
     private Medico escolherMedico(DadosAgendamentoConsulta dadosConsulta) {
