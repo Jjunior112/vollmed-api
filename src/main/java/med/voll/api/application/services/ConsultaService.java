@@ -31,7 +31,7 @@ public class ConsultaService {
     @Autowired
     private List<Validation> validators;
 
-    public Consulta agendarConsulta(DadosAgendamentoConsulta dadosConsulta) {
+    public DadosDetalhamentoConsulta agendarConsulta(DadosAgendamentoConsulta dadosConsulta) {
 
         if (!pacienteRepository.existsById(dadosConsulta.idPaciente())) {
             throw new ValidationException("Paciente informado não existe");
@@ -47,7 +47,7 @@ public class ConsultaService {
 
         repository.save(consulta);
 
-        return consulta;
+        return new DadosDetalhamentoConsulta(consulta);
 
     }
 
