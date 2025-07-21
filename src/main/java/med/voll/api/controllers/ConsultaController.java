@@ -1,5 +1,7 @@
 package med.voll.api.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import med.voll.api.domain.dtos.consulta.DadosAgendamentoConsulta;
@@ -16,6 +18,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/consultas")
+@SecurityRequirement(name = "bearer-key")
+
 public class ConsultaController {
 
     @Autowired
@@ -27,9 +31,9 @@ public class ConsultaController {
 
         var response = consultaService.agendarConsulta(dadosConsulta);
 
-        var uri = uriBuilder.path("/consultas/{id}").buildAndExpand(response.getId()).toUri();
+        var uri = uriBuilder.path("/consultas/{id}").buildAndExpand(response.id()).toUri();
 
-        return ResponseEntity.created(uri).body(new DadosDetalhamentoConsulta(response));
+        return ResponseEntity.created(uri).body(response);
 
     }
 
