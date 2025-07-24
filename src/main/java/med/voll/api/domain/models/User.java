@@ -3,6 +3,7 @@ package med.voll.api.domain.models;
 
 import jakarta.persistence.*;
 import lombok.*;
+import med.voll.api.domain.dtos.user.dadosRegistro;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,13 +11,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-@Entity(name="users")
-@Table(name="Users")
+@Entity(name = "users")
+@Table(name = "Users")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(of="id")
+@EqualsAndHashCode(of = "id")
 public class User implements UserDetails {
 
     @Id
@@ -28,6 +29,11 @@ public class User implements UserDetails {
 
     @Column(nullable = false)
     private String password;
+
+    public User(dadosRegistro registro) {
+        this.login = registro.username();
+        this.password = registro.password();
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

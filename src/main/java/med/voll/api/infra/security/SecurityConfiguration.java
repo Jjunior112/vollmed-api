@@ -1,5 +1,6 @@
 package med.voll.api.infra.security;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,18 +18,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
-
-    @Autowired
-
-    private SecurityFilter securityFilter;
-
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, SecurityFilter securityFilter) throws Exception {
         return http.csrf(csrf -> csrf.disable())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers(
-                                        HttpMethod.POST, "/login").permitAll()
+                                        HttpMethod.POST, "/user/login").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll()
 
                                 .anyRequest().authenticated()
@@ -48,6 +44,5 @@ public class SecurityConfiguration {
         return new BCryptPasswordEncoder();
 
     }
-
 
 }
