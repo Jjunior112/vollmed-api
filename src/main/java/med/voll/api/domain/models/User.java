@@ -3,7 +3,7 @@ package med.voll.api.domain.models;
 
 import jakarta.persistence.*;
 import lombok.*;
-import med.voll.api.domain.dtos.user.dadosRegistro;
+import med.voll.api.domain.dtos.user.DadosRegistro;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,7 +30,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    public User(dadosRegistro registro) {
+    public User(DadosRegistro registro) {
         this.login = registro.username();
         this.password = registro.password();
     }

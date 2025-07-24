@@ -1,6 +1,6 @@
 package med.voll.api.application.services;
 
-import med.voll.api.domain.dtos.user.dadosRegistro;
+import med.voll.api.domain.dtos.user.DadosRegistro;
 import med.voll.api.domain.models.User;
 import med.voll.api.infra.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class UserService implements UserDetailsService {
         return repository.findByLogin(username);
     }
 
-    public User createUser(dadosRegistro registro) {
+    public User createUser(DadosRegistro registro) {
 
         User user = new User(registro);
 

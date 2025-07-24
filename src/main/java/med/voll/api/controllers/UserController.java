@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import med.voll.api.application.services.UserService;
 import med.voll.api.domain.dtos.user.DadosListagemUsuario;
-import med.voll.api.domain.dtos.user.dadosRegistro;
+import med.voll.api.domain.dtos.user.DadosRegistro;
 import med.voll.api.domain.models.User;
 import med.voll.api.domain.dtos.user.DadosLogin;
 import med.voll.api.domain.dtos.user.DadosTokenJwt;
@@ -48,7 +48,7 @@ public class UserController {
     @PostMapping("/register")
     @SecurityRequirement(name = "bearer-key")
 
-    public ResponseEntity register(@RequestBody @Valid dadosRegistro registro) {
+    public ResponseEntity register(@RequestBody @Valid DadosRegistro registro) {
 
         User response = userService.createUser(registro);
 
